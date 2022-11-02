@@ -10,16 +10,16 @@
   <p id="output"></p>
 
   <script>
-    var loc = window.location;
-    var uri = 'ws:';
+    // var loc = window.location;
+    // var uri = 'ws:';
 
-    if (loc.protocol === 'https:') {
-      uri = 'wss:';
-    }
-    uri += '//' + loc.host;
-    uri += loc.pathname + 'ws';
+    // if (loc.protocol === 'https:') {
+    //   uri = 'wss:';
+    // }
+    // uri += '//' + loc.host;
+    // uri += loc.pathname + 'ws';
 
-    ws = new WebSocket(uri)
+    ws = new WebSocket("ws://127.0.0.1:1323/ws")
 
     ws.onopen = function() {
       console.log('Connected')

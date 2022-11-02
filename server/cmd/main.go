@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo/v4"
@@ -13,6 +14,7 @@ var (
 )
 
 func hello(c echo.Context) error {
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	ws, err := upgrader.Upgrade(c.Response(), c.Request(), nil)
 	if err != nil {
 		return err
@@ -39,7 +41,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Static("/", "../../client")
+	// e.Static("/", "../../client")
 	e.GET("/ws", hello)
 	e.Logger.Fatal(e.Start(":1323"))
 }
